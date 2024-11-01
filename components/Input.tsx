@@ -16,7 +16,10 @@ export const Input: React.FC<{
   text: string;
   setText: React.Dispatch<React.SetStateAction<string>>;
   disabled?: boolean;
-}> = ({ text, setText, disabled }) => {
+  style?: React.CSSProperties;
+  type?: string;
+  min?: number;
+}> = ({ text, setText, disabled, style, type = "text", min }) => {
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       setText(e.currentTarget.value);
@@ -26,9 +29,11 @@ export const Input: React.FC<{
 
   return (
     <input
+      type={type}
+      min={min}
       disabled={disabled}
       name="title"
-      style={textarea}
+      style={{ ...textarea, ...style }}
       value={text}
       onChange={onChange}
     />

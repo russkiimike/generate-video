@@ -37,12 +37,26 @@ const player: React.CSSProperties = {
 
 const Home: NextPage = () => {
   const [text, setText] = useState<string>(defaultMyCompProps.title);
+  const [greenscreenSource, setGreenscreenSource] = useState<string>(defaultMyCompProps.greenscreenSource);
+  const [source1, setSource1] = useState<string>(defaultMyCompProps.source1);
+  const [source2, setSource2] = useState<string>(defaultMyCompProps.source2);
+  const [source3, setSource3] = useState<string>(defaultMyCompProps.source3);
+  const [duration1, setDuration1] = useState<number>(defaultMyCompProps.duration1);
+  const [duration2, setDuration2] = useState<number>(defaultMyCompProps.duration2);
+  const [duration3, setDuration3] = useState<number>(defaultMyCompProps.duration3);
 
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
     return {
       title: text,
+      greenscreenSource,
+      source1,
+      source2,
+      source3,
+      duration1,
+      duration2,
+      duration3,
     };
-  }, [text]);
+  }, [text, greenscreenSource, source1, source2, source3, duration1, duration2, duration3]);
 
   return (
     <div>
@@ -64,13 +78,27 @@ const Home: NextPage = () => {
         <RenderControls
           text={text}
           setText={setText}
+          greenscreenSource={greenscreenSource}
+          setGreenscreenSource={setGreenscreenSource}
+          source1={source1}
+          setSource1={setSource1}
+          source2={source2}
+          setSource2={setSource2}
+          source3={source3}
+          setSource3={setSource3}
+          duration1={duration1}
+          setDuration1={setDuration1}
+          duration2={duration2}
+          setDuration2={setDuration2}
+          duration3={duration3}
+          setDuration3={setDuration3}
           inputProps={inputProps}
-        ></RenderControls>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Spacing></Spacing>
-        <Tips></Tips>
+        />
+        <Spacing />
+        <Spacing />
+        <Spacing />
+        <Spacing />
+        <Tips />
       </div>
     </div>
   );
