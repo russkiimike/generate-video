@@ -44,6 +44,9 @@ const Home: NextPage = () => {
   const [duration1, setDuration1] = useState<number>(defaultMyCompProps.duration1);
   const [duration2, setDuration2] = useState<number>(defaultMyCompProps.duration2);
   const [duration3, setDuration3] = useState<number>(defaultMyCompProps.duration3);
+  const [text1, setText1] = useState(defaultMyCompProps.text1);
+  const [text2, setText2] = useState(defaultMyCompProps.text2);
+  const [text3, setText3] = useState(defaultMyCompProps.text3);
 
   const inputProps: z.infer<typeof CompositionProps> = useMemo(() => {
     return {
@@ -55,8 +58,11 @@ const Home: NextPage = () => {
       duration1,
       duration2,
       duration3,
+      text1,
+      text2,
+      text3,
     };
-  }, [text, greenscreenSource, source1, source2, source3, duration1, duration2, duration3]);
+  }, [text, greenscreenSource, source1, source2, source3, duration1, duration2, duration3, text1, text2, text3]);
 
   return (
     <div>
@@ -92,6 +98,12 @@ const Home: NextPage = () => {
           setDuration2={setDuration2}
           duration3={duration3}
           setDuration3={setDuration3}
+          text1={text1}
+          setText1={setText1}
+          text2={text2}
+          setText2={setText2}
+          text3={text3}
+          setText3={setText3}
           inputProps={inputProps}
         />
         <Spacing />

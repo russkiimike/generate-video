@@ -38,15 +38,43 @@ export const Greenscreen: React.FC<{
  
   return (
     <AbsoluteFill>
-      <AbsoluteFill>
+      <AbsoluteFill style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
         <OffthreadVideo
-          style={{ opacity: 0 }}
+          style={{ 
+            opacity: 0,
+            width: '100%',
+            maxHeight: '100%',
+            objectFit: 'cover'
+          }}
           onVideoFrame={onVideoFrame}
           src={src}
         />
       </AbsoluteFill>
-      <AbsoluteFill>
-        <canvas ref={canvas} width={width} height={height} />
+      <AbsoluteFill style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        position: 'relative',
+        width: '100%',
+        height: '100%'
+      }}>
+        <canvas 
+          ref={canvas} 
+          width={width} 
+          height={height}
+          style={{
+            width: '100%',
+            maxHeight: '100%',
+            objectFit: 'cover'
+          }}
+        />
       </AbsoluteFill>
     </AbsoluteFill>
   );

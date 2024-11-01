@@ -15,6 +15,7 @@ import { Rings } from "./Rings";
 import { TextFade } from "./TextFade";
 import { Greenscreen } from "./Greenscreen";
 import { MediaSequence } from "./MediaSequence";
+import { TextOverlay } from "./TextOverlay";
 
 loadFont();
 
@@ -35,7 +36,10 @@ export const Main = ({
   source3,
   duration1,
   duration2,
-  duration3
+  duration3,
+  text1,
+  text2,
+  text3
 }: z.infer<typeof CompositionProps>) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -59,17 +63,14 @@ export const Main = ({
 
   const sequences = useMemo(() => {
     return [
-      { src: source1, duration: duration1 },
-      { src: source2, duration: duration2 },
-      { src: source3, duration: duration3 }
+      { src: source1, duration: duration1, text: text1 },
+      { src: source2, duration: duration2, text: text2 },
+      { src: source3, duration: duration3, text: text3 }
     ].filter(seq => seq.duration > 0);
-  }, [source1, source2, source3, duration1, duration2, duration3]);
+  }, [source1, source2, source3, duration1, duration2, duration3, text1, text2, text3]);
 
   return (
     <AbsoluteFill style={container}>
-      
-     
-     
       <Sequence durationInFrames={transitionStart + transitionDuration}>
         <Rings outProgress={logoOut} />
         <AbsoluteFill style={logo}>
@@ -77,18 +78,17 @@ export const Main = ({
         </AbsoluteFill>
       </Sequence>
 
-       <Series>
+      <Series>
         {sequences.map((seq, index) => (
           <Series.Sequence key={index} durationInFrames={seq.duration}>
             <MediaSequence src={seq.src} />
+            <TextOverlay style={seq.text} />
           </Series.Sequence>
         ))}
       </Series>
 
       <Sequence from={0}>
-        <AbsoluteFill style={{
-         
-        }}>
+        <AbsoluteFill>
           <Greenscreen opacity={0} src={greenscreenSource} />
         </AbsoluteFill>
       </Sequence>

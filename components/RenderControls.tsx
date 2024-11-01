@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { useRendering } from "../helpers/use-rendering";
-import { CompositionProps, COMP_NAME } from "../types/constants";
+import { CompositionProps, COMP_NAME, TextStyle } from "../types/constants";
 import { AlignEnd } from "./AlignEnd";
 import { Button } from "./Button/Button";
 import { InputContainer } from "./Container";
@@ -9,6 +9,7 @@ import { ErrorComp } from "./Error";
 import { Input } from "./Input";
 import { ProgressBar } from "./ProgressBar";
 import { Spacing } from "./Spacing";
+import { TextControls } from "./TextControls";
 
 const inputLabel: React.CSSProperties = {
   display: "block",
@@ -44,6 +45,12 @@ export const RenderControls: React.FC<{
   setDuration2: React.Dispatch<React.SetStateAction<number>>;
   duration3: number;
   setDuration3: React.Dispatch<React.SetStateAction<number>>;
+  text1: z.infer<typeof TextStyle>;
+  setText1: React.Dispatch<React.SetStateAction<z.infer<typeof TextStyle>>>;
+  text2: z.infer<typeof TextStyle>;
+  setText2: React.Dispatch<React.SetStateAction<z.infer<typeof TextStyle>>>;
+  text3: z.infer<typeof TextStyle>;
+  setText3: React.Dispatch<React.SetStateAction<z.infer<typeof TextStyle>>>;
   inputProps: z.infer<typeof CompositionProps>;
 }> = ({ 
   text, 
@@ -62,6 +69,12 @@ export const RenderControls: React.FC<{
   setDuration2,
   duration3,
   setDuration3,
+  text1,
+  setText1,
+  text2,
+  setText2,
+  text3,
+  setText3,
   inputProps 
 }) => {
   const { renderMedia, state, undo } = useRendering(COMP_NAME, inputProps);
@@ -101,6 +114,12 @@ export const RenderControls: React.FC<{
               />
             </div>
           </div>
+          <TextControls
+            label="Text Overlay 1"
+            textStyle={text1}
+            setTextStyle={setText1}
+            disabled={state.status === "invoking"}
+          />
           <Spacing />
           
           <div style={inputRow}>
@@ -124,6 +143,12 @@ export const RenderControls: React.FC<{
               />
             </div>
           </div>
+          <TextControls
+            label="Text Overlay 2"
+            textStyle={text2}
+            setTextStyle={setText2}
+            disabled={state.status === "invoking"}
+          />
           <Spacing />
           
           <div style={inputRow}>
@@ -147,6 +172,12 @@ export const RenderControls: React.FC<{
               />
             </div>
           </div>
+          <TextControls
+            label="Text Overlay 3"
+            textStyle={text3}
+            setTextStyle={setText3}
+            disabled={state.status === "invoking"}
+          />
           <Spacing />
 
           <label style={inputLabel}>Greenscreen Video URL</label>
